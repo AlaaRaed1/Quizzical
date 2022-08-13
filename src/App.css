@@ -1,0 +1,436 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Karla:wght@400;700&display=swap');
+
+
+span {
+  background: #FFF08F;
+  background: linear-gradient(to right, #FFF08F 0%, #ABE3F8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 500;
+}
+
+
+:root {
+  --bg-color: #F5F7FB;
+  --bg-color-inverse: hsl(220deg 26% 14%); 
+  --color: #293264;
+  /* same color b/c dark mode do not remove */
+  --focused-btn-color: #293264;
+  --accent-color: #4D5B9E;
+  --btn-hover-color: var(--color);
+  --btn-hover-bg-color: #D6DBF5;
+  --isHeld-bg-color: #D6DBF5;
+
+  --blob-mix-blend-mode: normal;
+
+  --question-border-bottom: hsl(231 41% 90%);
+  --icon-hover-color: var(--accent-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+      --bg-color: hsl(220deg 26% 14%); 
+      --bg-color-inverse: #F5F7FB;
+      --color: hsl(213deg 15% 97%);
+      --btn-hover-color: hsl(175deg 100% 75%);
+      --accent-color: hsl(175deg 100% 75%);
+      --btn-hover-bg-color: hsl(216deg 19% 28%);
+      --isHeld-color: #293264;
+
+      --blob-mix-blend-mode: overlay;
+
+      --question-border-bottom: hsl(231 41% 90% / .7);
+      --icon-hover-color: var(--btn-hover-color);
+  }   
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Karla';
+}
+p {
+  font-family: 'Inter'
+}
+html, body {
+  height: 100%;
+}
+body {
+  background-color: var(--bg-color);
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 34px 0 46px;
+  color: var(--color);
+}
+label {
+  display: block;
+  font-family: Inter;
+}
+input[type=number], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin-top: 12px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  box-sizing: border-box;
+  font-family: Inter;
+}
+.btn {
+  color: white;
+  padding: 1em 3.5em;
+  border: none;
+  border-radius: 16px; 
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 3vh;
+}
+.home__startBtn,
+.quiz__btn {
+  background-color: #4D5B9E;
+}
+.home {
+  /* relative so the blue blob on mobile stays at the bottom */
+  position: relative;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.icon {
+  margin-right: 1em;
+  transition: transform 450ms;
+}
+.icon:hover {
+  transition: transform 250ms;
+  transform: scale(1.3);
+  color: var(--icon-hover-color);
+  cursor: pointer;
+}
+@media (max-width: 650px) {
+  .icon:hover {
+      transform: none;
+      color: revert;
+  }
+}
+.settingsIconsHome {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  color: var(--color);
+  z-index: 1;
+}
+.home__title {
+  font-family: Karla;
+  margin: 0;
+  color: var(--color);
+  font-weight: 700px;
+  font-size: 5rem;
+}
+.home__text {
+  font-family: Inter;
+  margin-top: 10px;
+  font-weight: 400;
+  color: var(--color);
+  font-size: 16px;
+}
+.settingsIconsQuiz {
+  display: block;
+}
+
+/* .quiz is the whole quiz page and everything inside */
+.quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  min-height: 100%;
+  z-index: 1;
+  background-color: var(--bg-color);
+}
+.quiz__header {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: min(95%, 620px);
+  font-family: Karla;
+  color: white;
+  padding-bottom: 1.3rem;
+  font-size: 1.5rem;
+  z-index: 1;
+}
+i{
+  --fa-flip-x: 0; --fa-flip-y: 0;
+  
+}
+
+i:hover,
+i:active,
+i:focus {
+  --fa-animation-duration: 2s;
+  color: hsl(175deg 100% 75%);
+  --fa-flip-y: 1;
+  transform: scale(1.05);
+  cursor: pointer;
+  
+}
+
+.quiz__answers {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+/* All the font styles are inheritable */
+
+.quiz__loadingBox {
+  display: grid;
+  height: 100vh;
+  place-content: center;
+  font-family: 'Inter', Helvetica, Futura, san-serif;
+  color: var(--color);
+  font-size: 2rem;
+}
+.quiz__loadingText {
+  animation: bounce 1.8s ease-in-out infinite alternate;
+  animation-delay: 500ms;
+}
+.quiz__footer {
+  width: 70%;
+  display: flex;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.quiz__btn {
+  padding: 1em 1.5em;   
+}
+.quiz__finalText {
+  font-size: 1.2rem;
+  color: var(--color);
+  font-family: Inter;
+  font-weight: 700;
+  margin-right: 2rem;
+}
+.question__component {
+  width: min(90%, 600px);
+  border-bottom: 1px solid white;
+  padding: 16px;
+  z-index: 1;
+}
+.question__question {
+  font-family: Karla;
+  color: var(--color);
+  padding-bottom: 1rem;
+  font-size: 1.1rem;
+}
+.question__btn:hover,
+.question__btn:focus {
+  color: var(--btn-hover-color);
+  background-color: hsla(230, 34%, 46%, 0.90);
+}
+.question__btnctr {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.question__btn {
+  background-color: var(--bg-color);
+  color: var(--color);
+  border: 1px solid var(--color);
+  border-radius: 10px;
+  /* the padding connection from comment below */
+  padding: .25em .75em;
+  margin-bottom: .75em;
+  margin-right: 1em;
+  font-family: Inter;
+  font-weight: 500px;
+}
+.question__btn:focus,
+.question__btn:hover {
+  border: none;
+  background-color: var(--btn-hover-bg-color);
+  /* calc on padding so there is no layout shift on hover as sizes change */
+  padding: calc(.25em + 1px) calc(.75em + 1px);
+  outline: none;
+}
+.blueBlob {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+.yellowBlob {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 0;
+}
+.home__btnCtr {
+  z-index: 1;
+}
+.home__aboutBtn {
+  background-color: orange;
+  margin-top: 20px;
+  color: ghostwhite;
+}
+.home__startBtn,
+.home__aboutBtn {
+  transition: 400ms;
+  width: 100%;
+  z-index: 2;
+}
+.home__startBtn:hover,
+.home__aboutBtn:hover {
+  transform: scale(1.1);
+  filter: brightness(110%);
+}
+@media (max-width: 650px) {
+  .home__startBtn:hover,
+  .home__aboutBtn:hover {
+      transform: none;
+      filter: none;
+  }
+}
+@keyframes slide-in {
+  from {
+      transform: translateX(-100%)
+  }
+  to {
+      transform: translateX(0)
+  }
+}
+@keyframes fade-in {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+p, h3 {
+  color: var(--focused-btn-color);
+}
+a {
+  color: #4D5B9E;
+  font-weight: bold;
+}
+
+@media (max-width: 1000px) {
+  .modal {
+      width: 50%;
+  }
+}
+
+/* --MOBILE MEDIA QUERY */
+
+/* this was mostly a desktop first design so I will go with all max-width */
+@media (max-width: 650px) {
+  .modal {
+      width: 70%;
+  }
+  .modalWrapper {
+      animation: none;
+  }
+  .home {
+      height: auto; /* We need auto height because otherwise we constrain it to 100% height on smaller screens and that will be too little*/
+      padding-bottom: 2rem;
+  }
+  .home__title {
+      z-index: 1;
+      font-size: 4rem;
+  }
+  .home__text {
+      z-index: 1;
+  }
+  input, label, select {
+      z-index: 1;
+  }
+  .settingsIconsHome {
+      position: static;
+      margin-left: auto;
+      margin-top: 16px;
+      margin-right: 16px;
+  }
+  .quiz .soundIcon {
+      margin-right: 0;
+  }
+  .settingsIconsQuiz {
+      right: 8px;
+  }
+
+  .btn.question__btn {
+      padding: 1rem;
+  }
+  .quiz__loadingText {
+      font-size: 1rem;
+  }
+  .home .blueBlob{
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    width: 7rem;
+  } 
+  .blueBlob {
+    position: fixed;
+    width: 5rem;
+  }
+.home .yellowBlob, .yellowBlob{
+  position: fixed;
+  width: 5rem;
+}
+}
+
+@media (max-width: 400px) {
+  .home__title {
+      font-size: 3.5rem;
+      padding-top: 1rem;
+  }   
+  select {
+      color: black;
+      background-color: white;
+      height: 46px;
+  }
+  .icon {
+      margin-right: .75em;
+  }
+  .home .blueBlob{
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    width: 7rem;
+  } 
+  .blueBlob {
+    position: fixed;
+    width: 5rem;
+  }
+.home .yellowBlob, .yellowBlob{
+  position: fixed;
+  width: 5rem;
+}
+  .quiz {
+      padding-bottom: 5rem;
+  }
+
+  .quiz__footer--finished {
+      position: fixed;
+      bottom: 0;
+      background-color: var(--bg-color);
+      border: 2px solid #4D5B9E;
+      width: 100%;
+      padding: 1rem;
+  }
+}
